@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+participant "InformationServices.ShowCustomerService" as ShowCustomer
+participant "InformationServices.ShowAccountService" as ShowAccount
+participant "InformationServices.AccountActivityService" as ShowActivity
+participant "DatabaseConnection" as DB
+
+User -> Main: Select "Show Customer Information"
+Main -> ShowCustomer: Call showCustomerInformation()
+ShowCustomer -> DB: Fetch customer details
+DB --> ShowCustomer: Customer data
+ShowCustomer --> Main: Display customer information
+
+User -> Main: Select "Show Account Information"
+Main -> ShowAccount: Call showAccountsMenu()
+ShowAccount -> DB: Fetch account details
+DB --> ShowAccount: Account data
+ShowAccount --> Main: Display account information
+
+User -> Main: Select "Show Account Activity"
+Main -> ShowActivity: Call showAccountActivitiesMenu()
+ShowActivity -> DB: Fetch account activity details
+DB --> ShowActivity: Activity data
+ShowActivity --> Main: Display account activities
+
+User -> Main: Select "Logout"
+Main -> Login: Call logout()
+Login --> Main: Return to Login Menu
+
+@enduml
